@@ -75,27 +75,20 @@ class MusicController {
       } else {
         print("Mencoba memutar: $url");
 
-        // --- UBAH BAGIAN INI ---
-        // Tambahkan headers agar dianggap sebagai browser
         await _audioPlayer.setUrl(
           url,
           headers: {
             'User-Agent':
                 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            // Opsional: Kadang perlu Icy-MetaData
             'Icy-MetaData': '1',
           },
         );
-        // -----------------------
-
         await _audioPlayer.play();
       }
     } catch (e) {
       print("Error memutar audio: $e");
 
-      // Kirim error ke Bloc agar user tahu (Opsional tapi bagus)
       if (context.mounted) {
-        // Pastikan kamu punya import MusicErrorEvent
         context.read<MusicBloc>().add(
           MusicErrorEvent("Gagal memutar radio: $e"),
         );
@@ -108,17 +101,14 @@ class MusicController {
   }
 
   Future<void> adjustVolume(double step) async {
-    // Ambil volume HP saat ini (nilainya 0.0 sampai 1.0)
     double? currentVol = await FlutterVolumeController.getVolume();
-    currentVol ??= 0.5; // Default jika null
+    currentVol ??= 0.5;
 
     double newVol = currentVol + step;
 
-    // Batasi agar tidak lebih dari 100% atau kurang dari 0%
     if (newVol > 1.0) newVol = 1.0;
     if (newVol < 0.0) newVol = 0.0;
 
-    // Set Volume HP Langsung
     await FlutterVolumeController.setVolume(newVol);
 
     print("System Volume diatur ke: ${(newVol * 100).toInt()}%");

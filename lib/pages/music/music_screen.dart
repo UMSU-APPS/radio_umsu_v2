@@ -15,14 +15,12 @@ class MusicScreen extends StatefulWidget {
 }
 
 class _MusicScreenState extends State<MusicScreen> {
-  // Mengambil instance singleton controller
   final MusicController _controller = MusicController();
   double currentSliderValue = 10;
 
   @override
   void initState() {
     super.initState();
-    // Inisialisasi controller (Load data & Setup Audio Listener)
     _controller.init(context);
   }
 
@@ -33,14 +31,12 @@ class _MusicScreenState extends State<MusicScreen> {
       body: SafeArea(
         child: BlocBuilder<MusicBloc, MusicState>(
           builder: (context, state) {
-            // 1. TAMPILAN LOADING
             if (state.status == MusicStatus.loading) {
               return const Center(
                 child: CircularProgressIndicator(color: AppColors.primary),
               );
             }
 
-            // 2. TAMPILAN ERROR
             if (state.status == MusicStatus.failure ||
                 state.currentRadio == null) {
               return Center(
@@ -62,7 +58,6 @@ class _MusicScreenState extends State<MusicScreen> {
               );
             }
 
-            // 3. TAMPILAN PLAYER (DATA ADA)
             final radio = state.currentRadio!;
 
             return Padding(
@@ -73,7 +68,6 @@ class _MusicScreenState extends State<MusicScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // --- HEADER ---
                   Center(
                     child: Text(
                       "Radio UMSU",
@@ -87,7 +81,6 @@ class _MusicScreenState extends State<MusicScreen> {
                   ),
                   const SizedBox(height: 15),
 
-                  // --- ARTWORK DENGAN LOTTIE & GAMBAR TENGAH ---
                   Container(
                     width: 280,
                     height: 280,
@@ -138,7 +131,6 @@ class _MusicScreenState extends State<MusicScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // --- TITLE & ARTIST ---
                   Column(
                     children: [
                       Text(
@@ -164,7 +156,6 @@ class _MusicScreenState extends State<MusicScreen> {
 
                   const SizedBox(height: 10),
 
-                  // --- SLIDER (Static / Full / Locked) ---
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       disabledActiveTrackColor: AppColors.primary,
@@ -183,7 +174,6 @@ class _MusicScreenState extends State<MusicScreen> {
                     ),
                   ),
 
-                  // Label Live
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
@@ -204,7 +194,6 @@ class _MusicScreenState extends State<MusicScreen> {
                     ),
                   ),
 
-                  // --- CONTROLS ---
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -215,10 +204,8 @@ class _MusicScreenState extends State<MusicScreen> {
                         },
                       ),
 
-                      // TOMBOL PLAY / PAUSE
                       GestureDetector(
                         onTap: () {
-                          // Panggil fungsi playRadio di controller
                           _controller.playRadio(radio.url);
                         },
                         child: Container(
@@ -238,7 +225,6 @@ class _MusicScreenState extends State<MusicScreen> {
                             ],
                           ),
                           child: Icon(
-                            // LOGIC ICON BERUBAH DISINI
                             state.isPlaying ? Icons.pause : Icons.play_arrow,
                             color: Colors.white,
                             size: 40,
@@ -249,7 +235,6 @@ class _MusicScreenState extends State<MusicScreen> {
                       _buildControlIcon(
                         MdiIcons.volumePlus,
                         onTap: () {
-                          // Tambah volume sebesar 10% (0.1)
                           _controller.adjustVolume(0.1);
                         },
                       ),
