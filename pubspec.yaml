@@ -1,0 +1,58 @@
+name: radio_umsu
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  bloc: ^9.1.0
+  connectivity_plus: ^7.0.0
+  dio: ^5.9.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.0
+  flutter_easyloading: ^3.0.5
+  flutter_launcher_icons: ^0.14.4
+  flutter_material_design_icons: ^1.1.7447
+  flutter_native_splash: ^2.4.7
+  flutter_screenutil: ^5.9.3
+  flutter_volume_controller: ^1.3.4
+  fluttertoast: ^9.0.0
+  html: ^0.15.6
+  http: ^1.6.0
+  http_parser: ^4.1.2
+  intl: ^0.20.2
+  just_audio: ^0.10.5
+  lottie: ^3.3.2
+  material_design_icons_flutter: ^7.0.7296
+  onesignal_flutter: ^5.3.4
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  permission_handler: ^12.0.1
+  provider: ^6.1.5+1
+  shared_preferences: ^2.5.4
+  shimmer: ^3.0.0
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo_radio.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/images/
+    - assets/animations/
+    - .env
