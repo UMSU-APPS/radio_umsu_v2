@@ -1,7 +1,7 @@
 name: radio_umsu
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.1.0
+version: 2.4.1+12
 
 environment:
   sdk: ^3.10.4
@@ -38,6 +38,7 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^6.0.0
+  rename: ^3.1.0
   flutter_test:
     sdk: flutter
 
@@ -52,7 +53,6 @@ flutter:
 
   assets:
     - assets/
-    - assets/icons/
     - assets/images/
     - assets/animations/
     - .env
